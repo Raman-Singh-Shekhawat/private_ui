@@ -1,0 +1,260 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+#app {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Section styles */
+.section {
+    display: none;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section.active {
+    display: block;
+}
+
+/* Form styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input, select, textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+textarea {
+    height: 100px;
+    resize: vertical;
+}
+
+.button-group {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button[type="reset"] {
+    background-color: #f44336;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+/* Navigation styles */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    margin-right: 10px;
+}
+
+.nav-links a:hover {
+    background-color: #555;
+    border-radius: 4px;
+}
+
+.user-info {
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Mobile number input style */
+.mobile-input {
+    display: flex;
+    gap: 10px;
+}
+
+.mobile-input select {
+    width: 100px;
+}
+
+/* Success message style */
+.success-message {
+    color: #4CAF50;
+    padding: 15px;
+    margin: 10px 0;
+    border: 1px solid #4CAF50;
+    border-radius: 4px;
+    background-color: #e8f5e9;
+}
+
+/* Bill payment styles */
+#billsList {
+    margin-bottom: 20px;
+}
+
+.bill-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.payment-info {
+    background-color: #f8f9fa;
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+/* Complaint status styles */
+.complaint-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    padding: 15px;
+}
+
+.complaint-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.complaint-details {
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-radius: 4px;
+}
+
+.complaint-details p {
+    margin-bottom: 5px;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.status.under-review {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.status.in-progress {
+    background-color: #cce5ff;
+    color: #004085;
+}
+
+.status.completed {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+/* Modal Styles */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        display: block;
+        text-align: center;
+        margin: 0;
+    }
+
+    .button-group {
+        flex-direction: column;
+    }
+
+    .complaint-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}

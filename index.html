@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electricity Management System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Login Section -->
+        <div id="loginSection" class="section active">
+            <h2>Login</h2>
+            <form id="loginForm" onsubmit="return handleLogin(event)">
+                <div class="form-group">
+                    <label for="userId">User ID:</label>
+                    <input type="text" id="userId" required minlength="5" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" required maxlength="30">
+                </div>
+                <button type="submit">Login</button>
+                <p>New user? <a href="#" onclick="showSection('registrationSection')">Register here</a></p>
+            </form>
+        </div>
+
+        <!-- Registration Section -->
+        <div id="registrationSection" class="section">
+            <h2>Customer Registration</h2>
+            <form id="registrationForm" onsubmit="return handleRegistration(event)">
+                <div class="form-group">
+                    <label for="consumerId">Consumer ID:</label>
+                    <input type="number" id="consumerId" required pattern="\d{13}" title="Please enter 13 digits">
+                </div>
+                <div class="form-group">
+                    <label for="billNumber">Bill Number:</label>
+                    <input type="number" id="billNumber" required pattern="\d{5}" title="Please enter 5 digits">
+                </div>
+                <div class="form-group">
+                    <label for="title">Title:</label>
+                    <select id="title" required>
+                        <option value="">Select Title</option>
+                        <option value="Mr">Mr</option>
+                        <option value="Mrs">Mrs</option>
+                        <option value="Ms">Ms</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="customerName">Customer Name:</label>
+                    <input type="text" id="customerName" required maxlength="50">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="mobile">Mobile Number:</label>
+                    <div class="mobile-input">
+                        <select id="countryCode" required>
+                            <option value="+91">+91</option>
+                            <option value="+1">+1</option>
+                            <option value="+44">+44</option>
+                        </select>
+                        <input type="tel" id="mobile" required pattern="\d{10}">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="regUserId">User ID:</label>
+                    <input type="text" id="regUserId" required minlength="5" maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Password:</label>
+                    <input type="password" id="regPassword" required maxlength="30">
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" required maxlength="30">
+                </div>
+                <div class="button-group">
+                    <button type="submit">Register</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Main Dashboard -->
+        <div id="dashboardSection" class="section">
+            <nav class="navbar">
+                <div class="nav-links">
+                    <a href="#" onclick="showDashboard()">Home</a>
+                    <a href="#" onclick="showBillPayment()">Pay Bill</a>
+                    <a href="#" onclick="showComplaintRegistration()">Register Complaint</a>
+                    <a href="#" onclick="showComplaintStatus()">Complaint Status</a>
+                </div>
+                <div class="user-info">
+                    <span id="welcomeUser"></span>
+                    <button onclick="logout()">Logout</button>
+                </div>
+            </nav>
+            <div id="dashboardContent">
+                <h2>Welcome to Electricity Management System</h2>
+                <p>Please use the navigation menu to access different services.</p>
+            </div>
+        </div>
+
+        <!-- Bill Payment Section -->
+        <div id="billPaymentSection" class="section">
+            <h2>Bill Payment</h2>
+            <div id="billsList">
+                <!-- Bills will be dynamically populated here -->
+            </div>
+            <div id="paymentDetails" style="display: none;">
+                <h3>Payment Details</h3>
+                <div class="payment-info">
+                    <p>Bill Amount: <span id="billAmount">0</span></p>
+                    <p>PG Charge: <span id="pgCharge">0</span></p>
+                    <p>Total Payable: <span id="totalPayable">0</span></p>
+                </div>
+                <div class="payment-form">
+                    <div class="form-group">
+                        <label>Payment Mode:</label>
+                        <select id="paymentMode">
+                            <option value="credit">Credit Card</option>
+                            <option value="debit">Debit Card</option>
+                        </select>
+                    </div>
+                    <button onclick="proceedToPayment()">Pay Now</button>
+                    <button onclick="showDashboard()">Back to Home</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card Payment Section -->
+        <div id="cardPaymentSection" class="section">
+            <h2>Card Payment</h2>
+            <form id="cardPaymentForm" onsubmit="return handleCardPayment(event)">
+                <div class="form-group">
+                    <label for="cardNo">Card Number:</label>
+                    <input type="text" id="cardNo" required pattern="\d{16}" maxlength="16">
+                </div>
+                <div class="form-group">
+                    <label for="cardHolder">Card Holder Name:</label>
+                    <input type="text" id="cardHolder" required minlength="10">
+                </div>
+                <div class="form-group">
+                    <label for="expiryDate">Expiry Date:</label>
+                    <input type="text" id="expiryDate" required placeholder="MM/YY" pattern="\d{2}/\d{2}">
+                </div>
+                <div class="form-group">
+                    <label for="cvv">CVV:</label>
+                    <input type="password" id="cvv" required pattern="\d{3}" maxlength="3">
+                </div>
+                <button type="submit">Make Payment</button>
+                <button type="reset" onclick="cancelPayment ()">Cancel Payment</button>
+                <button onclick="showDashboard()">Back to Home</button>
+            </form>
+        </div>
+
+        <!-- Complaint Registration Section -->
+        <div id="complaintSection" class="section">
+            <h2>Register Complaint/Service</h2>
+            <form id="complaintForm" onsubmit="return handleComplaintRegistration(event)">
+                <div class="form-group">
+                    <label for="complaintType">Complaint/Service Type:</label>
+                    <select id="complaintType" required onchange="updateCategories()">
+                        <option value="">Select Type</option>
+                        <option value="billing">Billing Related</option>
+                        <option value="voltage">Voltage Related</option>
+                        <option value="disruption">Frequent Disruption</option>
+                        <option value="streetlight">Street Light Related</option>
+                        <option value="pole">Pole Related</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="category">Category:</label>
+                    <select id="category" required>
+                        <option value="">Select Category</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="contactPerson">Contact Person:</label>
+                    <input type="text" id="contactPerson" required>
+                </div>
+                <div class="form-group">
+                    <label for="landmark">Landmark:</label>
+                    <input type="text" id="landmark" required>
+                </div>
+                <div class="form-group">
+                    <label for="complaintConsumerNo">Consumer No:</label>
+                    <input type="text" id="complaintConsumerNo" required pattern="\d{13}">
+                </div>
+                <div class="form-group">
+                    <label for="problemDescription">Problem Description:</label>
+                    <textarea id="problemDescription" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="complaintMobile">Mobile Number:</label>
+                    <input type="tel" id="complaintMobile" required pattern="\d{10}">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label>
+                    <textarea id="address" required></textarea>
+                </div>
+                <div class="button-group">
+                    <button type="submit">Submit Complaint</button>
+                    <button type="button" onclick="handleComplaintCancel()">Cancel</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Complaint Status Section -->
+        <div id="complaintStatusSection" class="section">
+            <h2>Complaint Status</h2>
+            <div id="complaintsList">
+                <!-- Complaints will be dynamically populated here -->
+            </div>
+            <div class="button-group">
+                <button onclick="showDashboard()">Back to Home</button>
+            </div>
+        </div>
+    </div>
+
+        <!-- Payment Failed Modal -->
+    <div class="modal-overlay" id="paymentFailedModal">
+        <div class="modal-content">
+            <h3>Payment Failed!</h3>
+            <p>Your payment could not be processed. Please try again.</p>
+            <div class="modal-buttons">
+                <button onclick="closePaymentModal()">OK</button>
+            </div>
+        </div>
+    </div>    
+
+    <script src="main.js"></script>
+</body>
+</html>
